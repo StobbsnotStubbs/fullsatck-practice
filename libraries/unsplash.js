@@ -20,16 +20,17 @@ async function randomImageHandler(request, response) {
 }
 
 
-// http://localhost:3000/searchImage?comicNumber=614
+// http://localhost:3000/searchImage?title=dog
 function searchImageHandler(request, response) {
-  const comicNumber = request.query.comicNumber;
-   const url = `https://xkcd.com/${comicNumber}/info.0.json`;
+  const title = request.query.title;
+  const key = process.env.UNSPLASH_API_KEY;
+  const url = `https://api.unsplash.com/search/photos?query=${title}&client_id=${key}`;
   axios
     .get(url)
     .then((imgData) => {
       console.log(imgData.data);
-      const xComic = imgData.data.results.map((data) => new Photo(data));
-      response.status(200).send(xComic);
+      const pokePoke = imgData.data.results.map((data) => new Photo(data));
+      response.status(200).send(pokePoke);
     })
     .catch((err) => {
       response.status(500).send("something went wrong", err);
