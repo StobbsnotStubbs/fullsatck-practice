@@ -55,7 +55,7 @@ const PORT = process.env.PORT || 3001;
 app.get("/", homeHandler);
 app.get("/searchImage",validator, unsplash.searchImageHandler);
 app.get("/randomImage", unsplash.randomImageHandler);
-app.post('/my-route', patientSubmitter.addPatientHandler);
+app.post('/submit', patientSubmitter.addPatientHandler);
 app.get('/allPatients', patientSubmitter.getAllPatientsHandler)
 app.get("*", notFoundHandler);
 
